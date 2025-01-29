@@ -11,9 +11,47 @@ namespace Assignment1_Inheritance
 {
     public class Appliances
     {
+        //Constants
         private const string PATH = @"../../../res/appliances.txt";
         private const char sep = ';';
 
+        //Private properties
+        private string itemNumber;
+        private string brand;
+        private int quantity;
+        private string wattage;
+        private string color;
+        private string price;
+
+        //Public properties
+        public string ItemNumber {get {return itemNumber; } set { itemNumber = value; } }
+        public string Brand { get { return brand; } set { brand = value; } }
+        public int Quantity { get { return quantity; } set { quantity = value; } }
+        public string Wattage { get { return wattage; } set { wattage = value; } }
+        public string Color { get { return color; } set { color = value; } }
+        public string Price { get { return price; } set { price = value; } }
+
+        //Constructor
+        public Appliances() { }
+        public Appliances(string iN, string b, int q, string w, string c, string p)
+        {
+            ItemNumber = iN;
+            Brand = b;
+            Quantity = q;
+            Wattage = w;
+            Color = c;
+            Price = p;
+        }
+        //Public methods
+        public override string ToString()
+        {
+            return $"Item number: {ItemNumber}\n" +
+                $"Brand: {Brand}\n" +
+                $"Quantity: {Quantity}\n" +
+                $"Wattage: {Wattage}\n" +
+                $"Color: {Color}\n" +
+                $"Price: {Price}\n";
+        }
         public static List<Appliances> ReadFile()
         {
             StreamReader streamreader = new StreamReader(PATH);
