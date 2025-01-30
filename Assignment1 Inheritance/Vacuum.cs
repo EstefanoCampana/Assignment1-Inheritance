@@ -9,27 +9,22 @@ namespace Assignment1_Inheritance
     public class Vacuum : Appliances
     {
         // private data
-        private string itemNumber;
-        private string brand;
-        private int quantity;
-        private string wattage;
-        private string color;
-        private string price;
         private string grade;
         private int batteryVoltage;
 
         // public property
-        public int BatteryVoltage { get { return batteryVoltage; } }
+        public int BatteryVoltage { get { return batteryVoltage; } set { batteryVoltage = value; } }
 
         // constructor 
-        public Vacuum(string itemNumber, string brand, int quantity, string wattage, string color, string price, string grade, int batteryVoltage)
+        public Vacuum(string itemNumber, string brand, int quantity, string wattage, string color, string price, string grade, int batteryVoltage):
+                    base (itemNumber, brand, quantity, wattage, color, price)
         {
-            this.itemNumber = itemNumber;
-            this.brand = brand;
-            this.quantity = quantity;
-            this.wattage = wattage;
-            this.color = color;
-            this.price = price;
+            ItemNumber = itemNumber;
+            Brand = brand;
+            Quantity = quantity;
+            Wattage = wattage;
+            Color = color;
+            Price = price;
             this.grade = grade;
             this.batteryVoltage = batteryVoltage;
         }
@@ -37,7 +32,8 @@ namespace Assignment1_Inheritance
         //public method
         public override string ToString()
         {
-            return $"Grade: {grade} Doors\n" +
+            return base.ToString() +
+                $"Grade: {grade} Doors\n" +
                 $"BatteryVoltage: {batteryVoltage}";
         }
     }
