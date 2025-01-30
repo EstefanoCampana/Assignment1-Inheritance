@@ -14,11 +14,11 @@ namespace Assignment1_Inheritance
         private string width;
 
         // public properties
-        public int NumberOfDoors { get { return numOfDoors; } } set { numOfDoors = value; } }
+        public int NumberOfDoors { get { return numOfDoors; } set { numOfDoors = value; } }
         
         // constructor 
         public Refrigerator() { }
-        public Refrigerator(string itemNumber, string brand, int quantity, string wattage, string color, double price, int numOfDoors, string height, string width):
+        public Refrigerator(string itemNumber, string brand, int quantity, string wattage, string color, string price, int numOfDoors, string height, string width):
             base (itemNumber,brand,quantity,wattage,color,price)
         {
             ItemNumber = itemNumber;
