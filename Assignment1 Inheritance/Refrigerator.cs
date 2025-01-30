@@ -19,6 +19,9 @@ namespace Assignment1_Inheritance
         private string height;
         private string width;
 
+        // public properties
+        public int NumberOfDoors { get { return numOfDoors; } }
+        
         // constructor 
         public Refrigerator(string itemNumber, string brand, int quantity, string wattage, string color, double price, int numOfDoors, string height, string width)
         {

@@ -18,6 +18,9 @@ namespace Assignment1_Inheritance
         private string grade;
         private int batteryVoltage;
 
+        // public property
+        public int BatteryVoltage { get { return batteryVoltage; } }
+
         // constructor 
         public Vacuum(string itemNumber, string brand, int quantity, string wattage, string color, string price, string grade, int batteryVoltage)
         {
