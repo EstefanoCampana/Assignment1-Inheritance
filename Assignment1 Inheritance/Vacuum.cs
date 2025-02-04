@@ -14,27 +14,22 @@ namespace Assignment1_Inheritance
 
         // public property
         public int BatteryVoltage { get { return batteryVoltage; } set { batteryVoltage = value; } }
+        public string Grade { get { return grade; }set { grade = value; } }
 
         // constructor 
         public Vacuum(string itemNumber, string brand, int quantity, string wattage, string color, string price, string grade, int batteryVoltage):
                     base (itemNumber, brand, quantity, wattage, color, price)
         {
-            ItemNumber = itemNumber;
-            Brand = brand;
-            Quantity = quantity;
-            Wattage = wattage;
-            Color = color;
-            Price = price;
-            this.grade = grade;
-            this.batteryVoltage = batteryVoltage;
+            this.Grade = grade;
+            this.BatteryVoltage = batteryVoltage;
         }
 
         //public method
         public override string ToString()
         {
             return base.ToString() +
-                $"Grade: {grade} Doors\n" +
-                $"BatteryVoltage: {batteryVoltage}";
+                $"Grade: {Grade}\n" +
+                $"BatteryVoltage: {BatteryVoltage}\n";
         }
     }
 }

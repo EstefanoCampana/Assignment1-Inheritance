@@ -1,2 +1,4 @@
 ﻿// See https://aka.ms/new-console-template for more information
-Console.WriteLine("amogus");
+using Assignment1_Inheritance;
+Appliances.ReadFile();
+Console.WriteLine(Appliances.DisplayByType());
