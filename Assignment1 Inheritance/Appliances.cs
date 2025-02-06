@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.Tracing;
 using System.Linq;
 using System.Net.Http.Headers;
 using System.Runtime.CompilerServices;
@@ -16,12 +17,12 @@ namespace Assignment1_Inheritance
         private const char sep = ';';
 
         //Private properties
-        private string itemNumber;
-        private string brand;
+        private string itemNumber = "";
+        private string brand = "";
         private int quantity;
-        private string wattage;
-        private string color;
-        private string price;
+        private string wattage = "";
+        private string color = "";
+        private string price = "";
 
         //Public properties
         public string ItemNumber {get {return itemNumber; } set { itemNumber = value; } }
@@ -63,7 +64,7 @@ namespace Assignment1_Inheritance
             string id;
             while (!streamreader.EndOfStream)
             {
-                line = streamreader.ReadLine();
+                line = streamreader.ReadLine() ?? "";
                 fields = line.Split(sep);
                 applianceId = fields[0];
                 id = Convert.ToString(applianceId[0]);
@@ -78,7 +79,7 @@ namespace Assignment1_Inheritance
                 }
                 if (id == "3")
                 {
-                    appliance = new Microwave(applianceId, fields[1], Convert.ToInt32(fields[2]), fields[3], fields[4], fields[5], fields[6], Convert.ToInt32(fields[7]));
+                    appliance = new Microwave(applianceId, fields[1], Convert.ToInt32(fields[2]), fields[3], fields[4], fields[5], fields[6], fields[7]);
                 }
                 if (id == "4" || id == "5")
                 {
@@ -91,7 +92,7 @@ namespace Assignment1_Inheritance
         public string PurchaseAppliance()
         {
             Console.WriteLine("Enter the item number of the appliance:");
-            string applianceNumber = Console.ReadLine();
+            string applianceNumber = Console.ReadLine() ?? "";
             string availability = "";
             foreach(Appliances app in Appliances.ReadFile())
             {
@@ -180,64 +181,64 @@ namespace Assignment1_Inheritance
                     }
                 }
             }
-            //if (applianceType == 3)
-            //{
-            //    while (true)
-            //    {
-            //        Console.WriteLine("Room where the microwave will be instaled: K (kitchen) or W (work site).");
-            //        string roomType = Console.ReadLine().ToUpper();
-            //        if (roomType == "K" || roomType == "M")
-            //        {
-            //            Console.WriteLine("Matching Microwaves:");
-            //            foreach (Appliances app in Appliances.ReadFile())
-            //            {
-            //                if (app is Microwave)
-            //                {
-            //                    Microwave microwave = (Microwave)app;
-            //                    if (microwave.RoomType == roomType)
-            //                    {
-            //                        appliance += app;
-            //                    } 
-            //                }
-            //            }
-            //            break;
-            //        }
-            //        else
-            //        {
-            //            Console.WriteLine("Please Enter a valid room type.(K or M)");
-            //            continue;
-            //        }
-            //    }
-            //}
-            //if (applianceType == 4 || applianceType == 5)
-            //{
-            //    while (true)
-            //    {
-            //        Console.WriteLine("Enter the sound rating of the dishwasher: Qt (Quietest), Qr (Quieter), Qu (Quit) or M (Moderate).");
-            //        string soundRating = Console.ReadLine();
-            //        if (soundRating == "Qt" || soundRating == "Qr" || soundRating == "Qu" || soundRating == "M")
-            //        {
-            //            Console.WriteLine("Matching Dishwashers:");
-            //            foreach (Appliances app in Appliances.ReadFile())
-            //            {
-            //                if (app is Dishwasher)
-            //                {
-            //                    Dishwasher dishwasher = (Dishwasher)app;
-            //                    if (dishwasher.SoundRating == soundRating)
-            //                    {
-            //                        appliance += app;
-            //                    } 
-            //                }
-            //            }
-            //            break;
-            //        }
-            //        else
-            //        {
-            //            Console.WriteLine("Please Enter a valid sound rating. (Qt, Qr, Qu or M");
-            //            continue;
-            //        }
-            //    }
-            //}
+            if (applianceType == 3)
+            {
+                while (true)
+                {
+                    Console.WriteLine("Room where the microwave will be instaled: K (kitchen) or W (work site).");
+                    string roomType = Console.ReadLine().ToUpper();
+                    if (roomType == "K" || roomType == "W")
+                    {
+                        Console.WriteLine("Matching Microwaves:");
+                        foreach (Appliances app in Appliances.ReadFile())
+                        {
+                            if (app is Microwave)
+                            {
+                                Microwave microwave = (Microwave)app;
+                                if (microwave.RoomType == roomType)
+                                {
+                                    appliance += app;
+                                }
+                            }
+                        }
+                        break;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Please Enter a valid room type.(K or M)");
+                        continue;
+                    }
+                }
+            }
+            if (applianceType == 4 || applianceType == 5)
+            {
+                while (true)
+                {
+                    Console.WriteLine("Enter the sound rating of the dishwasher: Qt (Quietest), Qr (Quieter), Qu (Quit) or M (Moderate).");
+                    string soundRating = Console.ReadLine() ?? "";
+                    if (soundRating == "Qt" || soundRating == "Qr" || soundRating == "Qu" || soundRating == "M")
+                    {
+                        Console.WriteLine("Matching Dishwashers:");
+                        foreach (Appliances app in Appliances.ReadFile())
+                        {
+                            if (app is Dishwasher)
+                            {
+                                Dishwasher dishwasher = (Dishwasher)app;
+                                if (dishwasher.SoundRating == soundRating)
+                                {
+                                    appliance += app;
+                                }
+                            }
+                        }
+                        break;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Please Enter a valid sound rating. (Qt, Qr, Qu or M)");
+                        continue;
+                    }
+                }
+            }
             return appliance;
         }
     }

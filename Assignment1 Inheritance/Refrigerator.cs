@@ -11,8 +11,8 @@ namespace Assignment1_Inheritance
     {
         // private data
         private int numOfDoors;
-        private string height;
-        private string width;
+        private string height = "";
+        private string width = "";
 
         // public properties
         public int NumberOfDoors { get { return numOfDoors; } set { numOfDoors = value; } }

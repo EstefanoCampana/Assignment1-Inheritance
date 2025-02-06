@@ -1,4 +1,8 @@
 ﻿// See https://aka.ms/new-console-template for more information
 using Assignment1_Inheritance;
 Appliances.ReadFile();
-Console.WriteLine(Appliances.DisplayByType());
+
+while (true) 
+{
+    Console.WriteLine(Appliances.DisplayByType());
+}
