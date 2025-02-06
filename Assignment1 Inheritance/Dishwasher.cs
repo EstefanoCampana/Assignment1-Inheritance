@@ -9,8 +9,8 @@ namespace Assignment1_Inheritance
     public class Dishwasher : Appliances
     {
         //Private
-        private string soundRating;
-        private string feature;
+        private string soundRating = "";
+        private string feature = "";
 
         //Public
         public string Feature { get { return feature; } set { feature = value; } }
@@ -34,7 +34,7 @@ namespace Assignment1_Inheritance
             }
             else if (this.SoundRating == "Qr")
             {
-                textsoundRating = "Quieter";
+                textSoundRating = "Quieter";
             }
             else if (this.SoundRating == "Qu")
             {

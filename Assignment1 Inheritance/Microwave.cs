@@ -9,15 +9,15 @@ namespace Assignment1_Inheritance
     public class Microwave : Appliances
     {
         //Private
-        private string roomType;
-        private float capacity;
+        private string roomType = "";
+        private string capacity = "";
 
         //Public
-        public float Capacity { get { return capacity; } set { capacity = value; } }
+        public string Capacity { get { return capacity; } set { capacity = value; } }
         public string RoomType { get { return roomType; } set { roomType = value; } }
 
         //Constructor 
-        public Microwave(string itemNumber, string brand, int quantity, string wattage, string color, string price, string roomType, float capacity) :
+        public Microwave(string itemNumber, string brand, int quantity, string wattage, string color, string price, string capacity, string roomType) :
                     base(itemNumber, brand, quantity, wattage, color, price)
         {
             this.RoomType = roomType;

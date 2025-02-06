@@ -9,7 +9,7 @@ namespace Assignment1_Inheritance
     public class Vacuum : Appliances
     {
         // private data
-        private string grade;
+        private string grade = "";
         private int batteryVoltage;
 
         // public property
