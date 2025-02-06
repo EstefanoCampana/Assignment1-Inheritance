@@ -76,14 +76,14 @@ namespace Assignment1_Inheritance
                 {
                     appliance = new Vacuum(applianceId, fields[1], Convert.ToInt32(fields[2]), fields[3], fields[4], fields[5], fields[6], Convert.ToInt32(fields[7]));
                 }
-                //if (id == "3")
-                //{
-                //    appliance = new Microwave(applianceId, fields[1], Convert.ToInt32(fields[2]), fields[3], fields[4], fields[5], fields[6], fields[7]);
-                //}
-                //if (id == "4" || id == "5")
-                //{
-                //    appliance = new Dishwasher(applianceId, fields[1], Convert.ToInt32(fields[2]), fields[3], fields[4], fields[5], fields[6], fields[7], fields[8]);
-                //}
+                if (id == "3")
+                {
+                    appliance = new Microwave(applianceId, fields[1], Convert.ToInt32(fields[2]), fields[3], fields[4], fields[5], fields[6], Convert.ToInt32(fields[7]));
+                }
+                if (id == "4" || id == "5")
+                {
+                    appliance = new Dishwasher(applianceId, fields[1], Convert.ToInt32(fields[2]), fields[3], fields[4], fields[5], fields[6], fields[7]);
+                }
                 applianceList.Add(appliance);
             }
             return applianceList;
