@@ -89,7 +89,7 @@ namespace Assignment1_Inheritance
             }
             return applianceList;
         }
-        public string PurchaseAppliance()
+        public static string PurchaseAppliance()
         {
             Console.WriteLine("Enter the item number of the appliance:");
             string applianceNumber = Console.ReadLine() ?? "";
@@ -275,7 +275,7 @@ namespace Assignment1_Inheritance
             return $"Random appliances:\n{appliance}";
         }
 
-        //•	When the program exits, implement and call a method that takes
+        //When the program exits, implement and call a method that takes
         //the appliances stored in the list and persists them back to the appliances.txt file in the proper format.
         public static void WriteToFile()
         {
