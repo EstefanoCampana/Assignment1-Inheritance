@@ -18,7 +18,7 @@ while (true)
     switch (userOption)
     {
         case "1":
-            
+            Console.WriteLine(Appliances.PurchaseAppliance());
             break;
         case "2":
             Console.WriteLine(Appliances.DisplayByBrand());

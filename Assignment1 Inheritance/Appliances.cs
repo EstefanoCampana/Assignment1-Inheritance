@@ -89,7 +89,7 @@ namespace Assignment1_Inheritance
             }
             return applianceList;
         }
-        public string PurchaseAppliance()
+        public static string PurchaseAppliance()
         {
             Console.WriteLine("Enter the item number of the appliance:");
             string applianceNumber = Console.ReadLine() ?? "";
