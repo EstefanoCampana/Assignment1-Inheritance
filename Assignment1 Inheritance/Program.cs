@@ -2,7 +2,6 @@
 using Assignment1_Inheritance;
 Appliances.ReadFile();
 
-
 while (true) 
 {
     Console.WriteLine($"Welcome to Modern Appliances!");
@@ -18,7 +17,7 @@ while (true)
     switch (userOption)
     {
         case "1":
-            
+            Console.WriteLine(Appliances.PurchaseAppliance());
             break;
         case "2":
             Console.WriteLine(Appliances.DisplayByBrand());
