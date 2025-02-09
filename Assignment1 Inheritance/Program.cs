@@ -2,7 +2,6 @@
 using Assignment1_Inheritance;
 Appliances.ReadFile();
 
-
 while (true) 
 {
     Console.WriteLine($"Welcome to Modern Appliances!");
