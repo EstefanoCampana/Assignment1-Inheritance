@@ -17,7 +17,7 @@ namespace Assignment1_Inheritance
         private const char sep = ';';
 
         //Private properties
-        private string itemNumber = "";
+        private string itemNumber;
         private string brand = "";
         private int quantity;
         private string wattage = "";
@@ -93,24 +93,22 @@ namespace Assignment1_Inheritance
         {
             Console.WriteLine("Enter the item number of the appliance:");
             string applianceNumber = Console.ReadLine() ?? "";
-            string availability = "";
+            string availability = "No appliances found with that item number.";
             foreach (Appliances app in Appliances.ReadFile())
             {
                 if (applianceNumber == app.ItemNumber)
                 {
-                    if (app.Quantity != 0)
+                    
+                    if (app.Quantity == 0)
+                    {
+                        availability = "The appliance is not available to be checked out.";
+
+                    }
+                    else
                     {
                         availability = $"Appliance {applianceNumber} has been checked out.";
                         app.Quantity -= 1;
                     }
-                    else
-                    {
-                        availability = "The appliance is not available to be checked out.";
-                    }
-                }
-                else
-                {
-                    availability = "No appliances found with that item number.";
                 }
             }
             return availability;
@@ -186,7 +184,7 @@ namespace Assignment1_Inheritance
                 while (true)
                 {
                     Console.WriteLine("Room where the microwave will be instaled: K (kitchen) or W (work site).");
-                    string roomType = Console.ReadLine().ToUpper();
+                    string roomType = Console.ReadLine()??"".ToUpper();
                     if (roomType == "K" || roomType == "W")
                     {
                         Console.WriteLine("Matching Microwaves:");
@@ -248,7 +246,7 @@ namespace Assignment1_Inheritance
         public static string DisplayByBrand()
         {
             Console.WriteLine("Enter the brand to search for:");
-            string brand = Console.ReadLine()?.ToLower();
+            string brand = Console.ReadLine()??"".ToLower();
             string appliance = "";
             foreach (Appliances app in Appliances.ReadFile())
             {
