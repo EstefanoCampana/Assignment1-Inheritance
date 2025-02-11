@@ -87,6 +87,8 @@ namespace Assignment1_Inheritance
                 }
                 applianceList.Add(appliance);
             }
+
+            streamreader.Close();
             return applianceList;
         }
         public static string PurchaseAppliance()
