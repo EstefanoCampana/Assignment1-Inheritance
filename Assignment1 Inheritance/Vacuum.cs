@@ -27,9 +27,18 @@ namespace Assignment1_Inheritance
         //public method
         public override string ToString()
         {
+            string batteryVoltageText = "";
+            if (BatteryVoltage == 18)
+            {
+                batteryVoltageText = "low";
+            }
+            else
+            {
+                batteryVoltageText = "high";
+            }
             return base.ToString() +
                 $"Grade: {Grade}\n" +
-                $"BatteryVoltage: {BatteryVoltage}\n";
+                $"BatteryVoltage: {batteryVoltageText}\n";
         }
     }
 }
