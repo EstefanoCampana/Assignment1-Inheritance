@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.Tracing;
 using System.Linq;
 using System.Net.Http.Headers;
 using System.Runtime.CompilerServices;
@@ -17,14 +18,14 @@ namespace Assignment1_Inheritance
 
         //Private properties
         private string itemNumber;
-        private string brand;
+        private string brand = "";
         private int quantity;
-        private string wattage;
-        private string color;
-        private string price;
+        private string wattage = "";
+        private string color = "";
+        private string price = "";
 
         //Public properties
-        public string ItemNumber {get {return itemNumber; } set { itemNumber = value; } }
+        public string ItemNumber { get { return itemNumber; } set { itemNumber = value; } }
         public string Brand { get { return brand; } set { brand = value; } }
         public int Quantity { get { return quantity; } set { quantity = value; } }
         public string Wattage { get { return wattage; } set { wattage = value; } }
@@ -63,7 +64,7 @@ namespace Assignment1_Inheritance
             string id;
             while (!streamreader.EndOfStream)
             {
-                line = streamreader.ReadLine();
+                line = streamreader.ReadLine() ?? "";
                 fields = line.Split(sep);
                 applianceId = fields[0];
                 id = Convert.ToString(applianceId[0]);
@@ -82,39 +83,37 @@ namespace Assignment1_Inheritance
                 }
                 if (id == "4" || id == "5")
                 {
-                    appliance = new Dishwasher(applianceId, fields[1], Convert.ToInt32(fields[2]), fields[3], fields[4], fields[5], fields[6], fields[7], fields[8]);
+                    appliance = new Dishwasher(applianceId, fields[1], Convert.ToInt32(fields[2]), fields[3], fields[4], fields[5], fields[6], fields[7]);
                 }
                 applianceList.Add(appliance);
             }
             return applianceList;
         }
-        public string PurchaseAppliance()
+        public static string PurchaseAppliance()
         {
             Console.WriteLine("Enter the item number of the appliance:");
-            int applianceNumber = Convert.ToInt32(Console.ReadLine());
-            string availability = "";
-            foreach(Appliances app in Appliances.ReadFile())
+            string applianceNumber = Console.ReadLine() ?? "";
+            string availability = "No appliances found with that item number.";
+            foreach (Appliances app in Appliances.ReadFile())
             {
-                if(applianceNumber == app.ApplianceNumber)
+                if (applianceNumber == app.ItemNumber)
                 {
-                    if(app.Quantity != 0)
+                    
+                    if (app.Quantity == 0)
                     {
-                        availability = $"Appliance {applianceNumber} has been checked out.");
-                        app.Quantity -= 1;
+                        availability = "The appliance is not available to be checked out.";
+
                     }
                     else
                     {
-                        availability = "The appliance is not available to be checked out.");
+                        availability = $"Appliance {applianceNumber} has been checked out.";
+                        app.Quantity -= 1;
                     }
-                }
-                else
-                {
-                    availability = "No appliances found with that item number.");
                 }
             }
             return availability;
         }
-        public string DisplayByType() 
+        public static string DisplayByType()
         {
             Console.WriteLine("Appliance Types\n1 - Refrigerators\n2 - Vacuum\n3 - Microwave\n4 - Dishwasher");
             Console.WriteLine("Enter type of appliance:");
@@ -131,18 +130,21 @@ namespace Assignment1_Inheritance
                         Console.WriteLine("Matching Refrigerators:");
                         foreach (Appliances app in Appliances.ReadFile())
                         {
-                            Refrigerator refrigerator = (Refrigerator)app;
-                            if (refrigerator.NumberOfDoors == numberDoors)
+                            if (app is Refrigerator)
                             {
-                                appliance += app;
+                                Refrigerator refrigerator = (Refrigerator)app;
+                                if (refrigerator.NumberOfDoors == numberDoors)
+                                {
+                                    appliance += app;
 
+                                }
                             }
                         }
                         break;
                     }
                     else
                     {
-                        Console.WriteLine("Please Enter a valid number of doors.(2,3 or 4)");
+                        Console.WriteLine("Please Enter a valid number of doors.(2, 3 or 4)");
                         continue;
                     }
                 }
@@ -158,11 +160,15 @@ namespace Assignment1_Inheritance
                         Console.WriteLine("Matching Vacuums:");
                         foreach (Appliances app in Appliances.ReadFile())
                         {
-                            Vacuum vacuum = (Vacuum)app;
-                            if (vacuum.BatteryVoltage == batteryVoltage)
+                            if (app is Vacuum)
                             {
-                                appliance += app;
+                                Vacuum vacuum = (Vacuum)app;
+                                if (vacuum.BatteryVoltage == batteryVoltage)
+                                {
+                                    appliance += app;
+                                }
                             }
+
                         }
                         break;
                     }
@@ -172,22 +178,25 @@ namespace Assignment1_Inheritance
                         continue;
                     }
                 }
-            } 
+            }
             if (applianceType == 3)
             {
                 while (true)
                 {
                     Console.WriteLine("Room where the microwave will be instaled: K (kitchen) or W (work site).");
-                    string roomType = Console.ReadLine().ToUpper();
-                    if (roomType == "K" || roomType == "M")
+                    string roomType = Console.ReadLine()??"".ToUpper();
+                    if (roomType == "K" || roomType == "W")
                     {
                         Console.WriteLine("Matching Microwaves:");
                         foreach (Appliances app in Appliances.ReadFile())
                         {
-                            Microwave microwave = (Microwave)app;
-                            if (microwave.RoomType == roomType)
+                            if (app is Microwave)
                             {
-                                appliance += app ;
+                                Microwave microwave = (Microwave)app;
+                                if (microwave.RoomType == roomType)
+                                {
+                                    appliance += app;
+                                }
                             }
                         }
                         break;
@@ -199,34 +208,107 @@ namespace Assignment1_Inheritance
                     }
                 }
             }
-            if(applianceType == 4 || applianceType == 5)
+            if (applianceType == 4 || applianceType == 5)
             {
                 while (true)
                 {
                     Console.WriteLine("Enter the sound rating of the dishwasher: Qt (Quietest), Qr (Quieter), Qu (Quit) or M (Moderate).");
-                    string soundRating = Console.ReadLine();
+                    string soundRating = Console.ReadLine() ?? "";
                     if (soundRating == "Qt" || soundRating == "Qr" || soundRating == "Qu" || soundRating == "M")
                     {
                         Console.WriteLine("Matching Dishwashers:");
                         foreach (Appliances app in Appliances.ReadFile())
                         {
-                            Dishwasher dishwasher = (Dishwasher)app;
-                            if (dishwasher.SoundRating == soundRating)
+                            if (app is Dishwasher)
                             {
-                                appliance += app;
+                                Dishwasher dishwasher = (Dishwasher)app;
+                                if (dishwasher.SoundRating == soundRating)
+                                {
+                                    appliance += app;
+                                }
                             }
                         }
                         break;
                     }
                     else
                     {
-                        Console.WriteLine("Please Enter a valid sound rating. (Qt, Qr, Qu or M");
+                        Console.WriteLine("Please Enter a valid sound rating. (Qt, Qr, Qu or M)");
                         continue;
                     }
                 }
             }
             return appliance;
         }
+        //my work sheeba 
+        //•	A method that prompts the customer to enter a brand.
+        //The program performs a case-insensitive search of appliances that have the same brand, and displays them.
+
+        public static string DisplayByBrand()
+        {
+            Console.WriteLine("Enter the brand to search for:");
+            string brand = Console.ReadLine()??"".ToLower();
+            string appliance = "";
+            foreach (Appliances app in Appliances.ReadFile())
+            {
+                if (app.Brand.ToLower() == brand.ToLower())
+                {
+                    appliance += app;
+                }
+            }
+            return $"\nMatching Appliances:{appliance}";
+        }
+        //•	A method that prompts a user to enter a number, and the program then displays that number of random appliances.
+        //The appliances can be of any type. 
+        public static string DisplayRandomAppliances()
+        {
+            Console.WriteLine("Enter the number of appliances:");
+            int num = Convert.ToInt32(Console.ReadLine());
+            string appliance = "";
+            Random random = new Random();
+            for (int i = 0; i < num; i++)
+            {
+                int index = random.Next(0, Appliances.ReadFile().Count);
+                appliance += Appliances.ReadFile()[index];
+            }
+            return $"Random appliances:\n{appliance}";
+        }
+
+        //When the program exits, implement and call a method that takes
+        //the appliances stored in the list and persists them back to the appliances.txt file in the proper format.
+        public static void WriteToFile()
+        {
+            string sep = ";";
+            List<Appliances> applianceList = Appliances.ReadFile();
+            using (StreamWriter streamWriter = new StreamWriter(PATH))
+            {
+                foreach (Appliances app in applianceList)
+                {
+                    string line = app.ItemNumber + sep + app.Brand + sep + app.Quantity + sep + app.Wattage + sep + app.Color + sep + app.Price;
+                    if (app is Refrigerator)
+                    {
+                        Refrigerator refrigerator = (Refrigerator)app;
+                        line += sep + refrigerator.NumberOfDoors + sep + refrigerator.Height + sep + refrigerator.Width;
+                    }
+                    else if (app is Vacuum)
+                    {
+                        Vacuum vacuum = (Vacuum)app;
+                        line += sep + vacuum.Grade + sep + vacuum.BatteryVoltage;
+                    }
+                    else if (app is Microwave)
+                    {
+                        Microwave microwave = (Microwave)app;
+                        line += sep + microwave.Capacity + sep + microwave.RoomType;
+                    }
+                    else if (app is Dishwasher)
+                    {
+                        Dishwasher dishwasher = (Dishwasher)app;
+                        line += sep + dishwasher.Feature + sep + dishwasher.SoundRating;
+                    }
+                    streamWriter.WriteLine(line);
+                }
+            }
+        }
     }
+
 }
 
