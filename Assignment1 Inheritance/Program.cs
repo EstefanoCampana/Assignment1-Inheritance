@@ -2,8 +2,8 @@
 using Assignment1_Inheritance;
 
 Appliances.ReadFile();
-
-while (true) 
+var userOption = "";
+while (userOption != "5") 
 {
     Console.WriteLine($"Welcome to Modern Appliances!");
     Console.WriteLine($"How may we assist you?");
@@ -13,7 +13,7 @@ while (true)
     Console.WriteLine($"4 – Produce random appliance list");
     Console.WriteLine($"5 – Save & exit");
     Console.WriteLine($"Enter option:");
-    var userOption = Console.ReadLine();
+     userOption = Console.ReadLine();
 
     switch (userOption)
     {
