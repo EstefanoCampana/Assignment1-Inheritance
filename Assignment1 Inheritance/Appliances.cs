@@ -279,33 +279,36 @@ namespace Assignment1_Inheritance
         //the appliances stored in the list and persists them back to the appliances.txt file in the proper format.
         public static void WriteToFile()
         {
-            StreamWriter streamWriter = new StreamWriter(PATH);
-            foreach (Appliances app in Appliances.ReadFile())
+            string sep = ";";
+            List<Appliances> applianceList = Appliances.ReadFile();
+            using (StreamWriter streamWriter = new StreamWriter(PATH))
             {
-                string line = app.ItemNumber + sep + app.Brand + sep + app.Quantity + sep + app.Wattage + sep + app.Color + sep + app.Price;
-                if (app is Refrigerator)
+                foreach (Appliances app in applianceList)
                 {
-                    Refrigerator refrigerator = (Refrigerator)app;
-                    line += sep + refrigerator.NumberOfDoors + sep + refrigerator.Height + sep + refrigerator.Width;
+                    string line = app.ItemNumber + sep + app.Brand + sep + app.Quantity + sep + app.Wattage + sep + app.Color + sep + app.Price;
+                    if (app is Refrigerator)
+                    {
+                        Refrigerator refrigerator = (Refrigerator)app;
+                        line += sep + refrigerator.NumberOfDoors + sep + refrigerator.Height + sep + refrigerator.Width;
+                    }
+                    else if (app is Vacuum)
+                    {
+                        Vacuum vacuum = (Vacuum)app;
+                        line += sep + vacuum.Grade + sep + vacuum.BatteryVoltage;
+                    }
+                    else if (app is Microwave)
+                    {
+                        Microwave microwave = (Microwave)app;
+                        line += sep + microwave.Capacity + sep + microwave.RoomType;
+                    }
+                    else if (app is Dishwasher)
+                    {
+                        Dishwasher dishwasher = (Dishwasher)app;
+                        line += sep + dishwasher.Feature + sep + dishwasher.SoundRating;
+                    }
+                    streamWriter.WriteLine(line);
                 }
-                if (app is Vacuum)
-                {
-                    Vacuum vacuum = (Vacuum)app;
-                    line += sep + vacuum.Grade + sep + vacuum.BatteryVoltage;
-                }
-                if (app is Microwave)
-                {
-                    Microwave microwave = (Microwave)app;
-                    line += sep + microwave.Capacity + sep + microwave.RoomType;
-                }
-                if (app is Dishwasher)
-                {
-                    Dishwasher dishwasher = (Dishwasher)app;
-                    line += sep + dishwasher.Feature + sep + dishwasher.SoundRating;
-                }
-                streamWriter.WriteLine(line);
             }
-            streamWriter.Close();
         }
     }
 
