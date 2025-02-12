@@ -125,7 +125,7 @@ namespace Assignment1_Inheritance
                     //If the quantity is not zero.
                     else
                     {
-                        availability = $"Appliance {"applianceNumber"} has been checked out.";
+                        availability = $"Appliance \"{applianceNumber}\" has been checked out.";
                         app.Quantity -= 1;
                     }
                 }
