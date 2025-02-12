@@ -1,19 +1,21 @@
 ﻿// See https://aka.ms/new-console-template for more information
 using Assignment1_Inheritance;
 
+//Calls ReadFile method to fill the list with objects.
 Appliances.ReadFile();
+
 var userOption = "";
 while (userOption != "5") 
 {
-    Console.WriteLine($"Welcome to Modern Appliances!");
-    Console.WriteLine($"How may we assist you?");
-    Console.WriteLine($"1 – Check out appliance");
-    Console.WriteLine($"2 – Find appliances by brand");
-    Console.WriteLine($"3 – Display appliances by type");
-    Console.WriteLine($"4 – Produce random appliance list");
-    Console.WriteLine($"5 – Save & exit");
-    Console.WriteLine($"Enter option:");
-     userOption = Console.ReadLine();
+    Console.WriteLine($"Welcome to Modern Appliances!\n"+
+        $"How may we assist you?\n"+
+        $"1 – Check out appliance\n"+
+        $"2 – Find appliances by brand\n"+
+        $"3 – Display appliances by type\n"+
+        $"4 – Produce random appliance list\n"+
+        $"5 – Save & exit\n"+
+        $"Enter option:");
+    userOption = Console.ReadLine();
 
     switch (userOption)
     {
