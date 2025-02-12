@@ -101,6 +101,7 @@ namespace Assignment1_Inheritance
                 //Adds each appliance into the list.
                 applianceList.Add(appliance);
             }
+            streamreader.Close();
             return applianceList;
         }
         //Method to check out an appliance.
@@ -314,38 +315,36 @@ namespace Assignment1_Inheritance
         //The appliances stored in the list and persists them back to the appliances.txt file in the proper format.
         public static void WriteToFile()
         {
-            string sep = ";";
-            List<Appliances> applianceList = Appliances.ReadFile();
-            using (StreamWriter streamWriter = new StreamWriter(PATH))
-            {
-                foreach (Appliances app in applianceList)
+            StreamWriter streamWriter = new(PATH);
+            string line;
+            foreach (Appliances app in Appliances.ReadFile())
                 {
-                    string line = app.ItemNumber + sep + app.Brand + sep + app.Quantity + sep + app.Wattage + sep + app.Color + sep + app.Price;
-                    if (app is Refrigerator)
-                    {
-                        Refrigerator refrigerator = (Refrigerator)app;
-                        line += sep + refrigerator.NumberOfDoors + sep + refrigerator.Height + sep + refrigerator.Width;
-                    }
-                    else if (app is Vacuum)
-                    {
-                        Vacuum vacuum = (Vacuum)app;
-                        line += sep + vacuum.Grade + sep + vacuum.BatteryVoltage;
-                    }
-                    else if (app is Microwave)
-                    {
-                        Microwave microwave = (Microwave)app;
-                        line += sep + microwave.Capacity + sep + microwave.RoomType;
-                    }
-                    else if (app is Dishwasher)
-                    {
-                        Dishwasher dishwasher = (Dishwasher)app;
-                        line += sep + dishwasher.Feature + sep + dishwasher.SoundRating;
-                    }
-                    streamWriter.WriteLine(line);
-                }
+                  line = app.ItemNumber + sep + app.Brand + sep + app.Quantity + sep + app.Wattage + sep + app.Color + sep + app.Price;
+                 if (app is Refrigerator)
+                 {
+                    Refrigerator refrigerator = (Refrigerator)app;
+                    line += sep + refrigerator.NumberOfDoors + sep + refrigerator.Height + sep + refrigerator.Width;
+                 }
+                 else if (app is Vacuum)
+                 {
+                    Vacuum vacuum = (Vacuum)app;
+                    line += sep + vacuum.Grade + sep + vacuum.BatteryVoltage;
+                 }
+                 else if (app is Microwave)
+                 {
+                    Microwave microwave = (Microwave)app;
+                    line += sep + microwave.Capacity + sep + microwave.RoomType;
+                 }
+                 else if (app is Dishwasher)
+                 {
+                    Dishwasher dishwasher = (Dishwasher)app;
+                    line += sep + dishwasher.Feature + sep + dishwasher.SoundRating;
+                 }
+                 streamWriter.WriteLine(line);
             }
+            streamWriter.Close();
         }
     }
-
 }
+
 
