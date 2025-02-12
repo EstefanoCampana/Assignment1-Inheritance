@@ -30,11 +30,11 @@ namespace Assignment1_Inheritance
             string batteryVoltageText = "";
             if (BatteryVoltage == 18)
             {
-                batteryVoltageText = "low";
+                batteryVoltageText = "Low";
             }
             else
             {
-                batteryVoltageText = "high";
+                batteryVoltageText = "High";
             }
             return base.ToString() +
                 $"Grade: {Grade}\n" +

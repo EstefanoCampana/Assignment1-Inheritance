@@ -125,7 +125,7 @@ namespace Assignment1_Inheritance
                     //If the quantity is not zero.
                     else
                     {
-                        availability = $"Appliance {applianceNumber} has been checked out.";
+                        availability = $"Appliance {"applianceNumber"} has been checked out.";
                         app.Quantity -= 1;
                     }
                 }
@@ -294,7 +294,7 @@ namespace Assignment1_Inheritance
                     appliance += app;
                 }
             }
-            return $"\nMatching Appliances:{appliance}";
+            return $"Matching Appliances:\n{appliance}";
         }
         //A method that prompts a user to enter a number, and the program then displays that number of random appliances.
         //The appliances can be of any type. 
