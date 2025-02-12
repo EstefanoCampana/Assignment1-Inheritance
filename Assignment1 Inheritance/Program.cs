@@ -4,7 +4,8 @@ using Assignment1_Inheritance;
 //Calls ReadFile method to fill the list with objects.
 Appliances.ReadFile();
 
-while (true) 
+var userOption = "";
+while (userOption != "5") 
 {
     Console.WriteLine($"Welcome to Modern Appliances!\n"+
         $"How may we assist you?\n"+
@@ -14,7 +15,7 @@ while (true)
         $"4 – Produce random appliance list\n"+
         $"5 – Save & exit\n"+
         $"Enter option:");
-    var userOption = Console.ReadLine();
+    userOption = Console.ReadLine();
 
     switch (userOption)
     {
