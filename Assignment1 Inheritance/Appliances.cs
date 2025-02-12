@@ -101,6 +101,7 @@ namespace Assignment1_Inheritance
                 //Adds each appliance into the list.
                 applianceList.Add(appliance);
             }
+
             streamreader.Close();
             return applianceList;
         }
@@ -165,7 +166,7 @@ namespace Assignment1_Inheritance
                         //Breaks if found.
                         break;
                     }
-                    //Else display an error message.
+                    //Else displays an error message.
                     else
                     {
                         Console.WriteLine("Please Enter a valid number of doors.(2, 3 or 4)");
@@ -200,7 +201,7 @@ namespace Assignment1_Inheritance
                         //Breaks if found.
                         break;
                     }
-                    //Else display an error message.
+                    //Else displays an error message.
                     else
                     {
                         Console.WriteLine("Please Enter a valid number of voltage. (18 or 24)");
@@ -234,7 +235,7 @@ namespace Assignment1_Inheritance
                         //Breaks if found.
                         break;
                     }
-                    //Else display an error message.
+                    //Else displays an error message.
                     else
                     {
                         Console.WriteLine("Please Enter a valid room type.(K or M)");
@@ -267,7 +268,7 @@ namespace Assignment1_Inheritance
                         //Breaks if found.
                         break;
                     }
-                    //Else print an error message.
+                    //Else displays an error message.
                     else
                     {
                         Console.WriteLine("Please Enter a valid sound rating. (Qt, Qr, Qu or M)");
@@ -277,7 +278,7 @@ namespace Assignment1_Inheritance
             }
             return appliance;
         }
-        //Sheeba:
+        //my work sheeba 
         //A method that prompts the customer to enter a brand.
         //The program performs a case-insensitive search of appliances that have the same brand, and displays them.
 
@@ -312,39 +313,41 @@ namespace Assignment1_Inheritance
         }
 
         //When the program exits, implement and call a method that takes
-        //The appliances stored in the list and persists them back to the appliances.txt file in the proper format.
+        //the appliances stored in the list and persists them back to the appliances.txt file in the proper format.
         public static void WriteToFile()
         {
-            StreamWriter streamWriter = new(PATH);
-            string line;
-            foreach (Appliances app in Appliances.ReadFile())
+            string sep = ";";
+            List<Appliances> applianceList = Appliances.ReadFile();
+            using (StreamWriter streamWriter = new StreamWriter(PATH))
+            {
+                foreach (Appliances app in applianceList)
                 {
-                  line = app.ItemNumber + sep + app.Brand + sep + app.Quantity + sep + app.Wattage + sep + app.Color + sep + app.Price;
-                 if (app is Refrigerator)
-                 {
-                    Refrigerator refrigerator = (Refrigerator)app;
-                    line += sep + refrigerator.NumberOfDoors + sep + refrigerator.Height + sep + refrigerator.Width;
-                 }
-                 else if (app is Vacuum)
-                 {
-                    Vacuum vacuum = (Vacuum)app;
-                    line += sep + vacuum.Grade + sep + vacuum.BatteryVoltage;
-                 }
-                 else if (app is Microwave)
-                 {
-                    Microwave microwave = (Microwave)app;
-                    line += sep + microwave.Capacity + sep + microwave.RoomType;
-                 }
-                 else if (app is Dishwasher)
-                 {
-                    Dishwasher dishwasher = (Dishwasher)app;
-                    line += sep + dishwasher.Feature + sep + dishwasher.SoundRating;
-                 }
-                 streamWriter.WriteLine(line);
+                    string line = app.ItemNumber + sep + app.Brand + sep + app.Quantity + sep + app.Wattage + sep + app.Color + sep + app.Price;
+                    if (app is Refrigerator)
+                    {
+                        Refrigerator refrigerator = (Refrigerator)app;
+                        line += sep + refrigerator.NumberOfDoors + sep + refrigerator.Height + sep + refrigerator.Width;
+                    }
+                    else if (app is Vacuum)
+                    {
+                        Vacuum vacuum = (Vacuum)app;
+                        line += sep + vacuum.Grade + sep + vacuum.BatteryVoltage;
+                    }
+                    else if (app is Microwave)
+                    {
+                        Microwave microwave = (Microwave)app;
+                        line += sep + microwave.Capacity + sep + microwave.RoomType;
+                    }
+                    else if (app is Dishwasher)
+                    {
+                        Dishwasher dishwasher = (Dishwasher)app;
+                        line += sep + dishwasher.Feature + sep + dishwasher.SoundRating;
+                    }
+                    streamWriter.WriteLine(line);
+                }
             }
-            streamWriter.Close();
         }
     }
-}
 
+}
 
